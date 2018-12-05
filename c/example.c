@@ -51,14 +51,12 @@ void main(int argc, char *argv[]) {
 	// this will be the number of pd codes contained in the file
 	while((read = getline(&line, &len, infile)) == 1) {}
 
-	printf("%s", line);
-
 	imax = strtol(line, &endptr, 10);
 
-	// printf("imax is %ld\n", imax);
+	printf("imax is %ld\n", imax);
 
 	for(i=0; i < imax; i++) {
-//		printf("here\n");
+		printf("here\n");
 		// get the next pd code from the file
 		// TODO: what to do if this is null???
 		next_pd_code = pd_read_KnotTheory(infile);

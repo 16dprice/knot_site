@@ -12,7 +12,7 @@ echo "<br>----------------------------------------<br><br>";
 
 $reducedCodes = fopen("c/reduced_codes.txt", "r");
 
-$count = 0;
+$count = -1; // starts at -1 because the file has an extra line at the end
 while(!feof($reducedCodes)) {
     echo fgets($reducedCodes) . "<br>";
     $count++;
