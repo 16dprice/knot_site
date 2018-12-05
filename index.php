@@ -1,5 +1,17 @@
 <?php
 
+$form = "<form action='php/upload.php' method='post' enctype='multipart/form-data'>
+    
+    Select file to upload:
+    <input type='file' name='fileToUpload' id='fileToUpload'>
+    <input type='submit' value='Upload File' name='submit'>
+
+</form>
+";
+
+echo $form;
+echo "<br><br>";
+
 shell_exec("c/example");
 
 $originalCodes = fopen("c/pdcodes.txt", "r");
