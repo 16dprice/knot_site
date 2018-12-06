@@ -1,18 +1,25 @@
 <?php
 
-$form = "<form action='php/upload.php' method='post' enctype='multipart/form-data'>
-    
-    Select file to upload:
-    <input type='file' name='fileToUpload' id='fileToUpload'>
-    <input type='submit' value='Upload File' name='submit'>
+//<editor-fold desc="Autoload">
+require_once("php/autoload/autoload.class.php");
 
-</form>
-";
+new Autoload(['php']);
+//</editor-fold>
+
+$form = new HTML_Element("form");
+$form->action = 'php/upload.php';
+$form->method = 'post';
+$form->enctype = 'multipart/form-data';
+
+$form->text .= "Select file to Upload:";
+$form->text .= new HTML_Element("input", ['type' => 'file', 'name' => 'fileToUpload', 'id' => 'fileToUpload']);
+$form->text .= new HTML_Element("input", ['type' => 'subimt', 'value' => 'Upload File', 'name' => 'submit']);
 
 echo $form;
 echo "<br><br>";
 
 shell_exec("c/example");
+
 
 $originalCodes = fopen("c/pdcodes.txt", "r");
 
