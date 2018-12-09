@@ -20,4 +20,4 @@ if($uploadOk == 0) {
     }
 }
 
-header("Location: http://107.170.2.119/knot_site/sandboxes/dj/");
+header("Location: http://knotresearch.from-ky.com/knot_site/sandboxes/dj/");

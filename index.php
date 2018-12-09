@@ -1,5 +1,14 @@
 <?php
 
+//<editor-fold desc="Error Reporting">
+
+// setup error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+//</editor-fold>
+
 //<editor-fold desc="Autoload">
 require_once("php/autoload/autoload.class.php");
 
@@ -13,7 +22,7 @@ $form->enctype = 'multipart/form-data';
 
 $form->text .= "Select file to Upload:";
 $form->text .= new HTML_Element("input", ['type' => 'file', 'name' => 'fileToUpload', 'id' => 'fileToUpload']);
-$form->text .= new HTML_Element("input", ['type' => 'subimt', 'value' => 'Upload File', 'name' => 'submit']);
+$form->text .= new HTML_Element("input", ['type' => 'submit', 'value' => 'Upload File', 'name' => 'submit']);
 
 echo $form;
 echo "<br><br>";
@@ -22,14 +31,20 @@ shell_exec("c/example");
 
 
 $originalCodes = fopen("c/pdcodes.txt", "r");
+$reducedCodes = fopen("c/reduced_codes.txt", "r");
 
 while(!feof($originalCodes)) {
-    echo fgets($originalCodes) . "<br>";
+    $line = fgets($originalCodes);
+    if($line == "\n") {
+//        echo "was empty<br>";
+    } else {
+        echo $line . "<br>";
+    }
 }
 
-echo "<br>----------------------------------------<br><br>";
+new Simplified_PD_Processor($originalCodes, $reducedCodes);
 
-$reducedCodes = fopen("c/reduced_codes.txt", "r");
+echo "<br>----------------------------------------<br><br>";
 
 $count = -1; // starts at -1 because the file has an extra line at the end
 while(!feof($reducedCodes)) {
