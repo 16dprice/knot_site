@@ -33,23 +33,9 @@ shell_exec("c/example");
 $originalCodes = fopen("c/pdcodes.txt", "r");
 $reducedCodes = fopen("c/reduced_codes.txt", "r");
 
-while(!feof($originalCodes)) {
-    $line = fgets($originalCodes);
-    if($line == "\n") {
-//        echo "was empty<br>";
-    } else {
-        echo $line . "<br>";
-    }
-}
 
-new Simplified_PD_Processor($originalCodes, $reducedCodes);
+$PDprocessor = new Simplified_PD_Processor($originalCodes, $reducedCodes);
 
-echo "<br>----------------------------------------<br><br>";
+$inputDisplay = $PDprocessor->getInputFileContainer();
 
-$count = -1; // starts at -1 because the file has an extra line at the end
-while(!feof($reducedCodes)) {
-    echo fgets($reducedCodes) . "<br>";
-    $count++;
-}
-
-echo "<br><h1>$count codes when reduced</h1>";
+echo $inputDisplay;
