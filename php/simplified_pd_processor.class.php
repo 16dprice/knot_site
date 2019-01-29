@@ -62,12 +62,24 @@ class Simplified_PD_Processor {
 
     public function getInputFileContainer() {
 
-        $table = new HTML_Element("table");
-        $table->style = "width: 80%;";
+        return $this->getFileContainer($this->inputPDs);
 
-        foreach($this->inputPDs as $key => $pd) {
+    }
+
+    public function getOutputFileContainer() {
+
+        return $this->getFileContainer($this->outputPDs);
+
+    }
+
+    private function getFileContainer($inputPDs) {
+
+        $table = new HTML_Element("table");
+        $table->style = "width: 80%; margin: 0 auto;";
+
+        foreach($inputPDs as $key => $pd) {
             $tr = new HTML_Element("tr");
-            $tr->text .= $pd;
+            $tr->text .= "<td>$pd</td>";
 
             $table->text .= $tr;
         }

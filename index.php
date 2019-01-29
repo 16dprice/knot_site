@@ -24,6 +24,8 @@ $form->text .= "Select file to Upload:";
 $form->text .= new HTML_Element("input", ['type' => 'file', 'name' => 'fileToUpload', 'id' => 'fileToUpload']);
 $form->text .= new HTML_Element("input", ['type' => 'submit', 'value' => 'Upload File', 'name' => 'submit']);
 
+$form->style = "width: 80%; margin: 0 auto;";
+
 echo $form;
 echo "<br><br>";
 
@@ -37,5 +39,8 @@ $reducedCodes = fopen("c/reduced_codes.txt", "r");
 $PDprocessor = new Simplified_PD_Processor($originalCodes, $reducedCodes);
 
 $inputDisplay = $PDprocessor->getInputFileContainer();
+$outputDisplay = $PDprocessor->getOutputFileContainer();
 
 echo $inputDisplay;
+echo "<br><br>";
+echo $outputDisplay;
