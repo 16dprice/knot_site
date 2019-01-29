@@ -45,7 +45,7 @@ void main(int argc, char *argv[]) {
 
 	// some declarations
 	flype_circuit = pd_new_pdstor();
-	infile = fopen("/var/www/html/knot_site/sandboxes/dj/c/pdcodes.txt", "r"); // example file
+	infile = fopen("/var/www/html/sandboxes/dj/knot_site/c/pdcodes.txt", "r"); // example file
 
 	// iterate through until read is the first line with length not equal to 1
 	// this will be the number of pd codes contained in the file
@@ -68,11 +68,11 @@ void main(int argc, char *argv[]) {
 		free(next_pd_code);
 	}
 
-	outfile = fopen("/var/www/html/knot_site/sandboxes/dj/c/reduced_codes.pdstor","w");
+	outfile = fopen("/var/www/html/sandboxes/dj/knot_site/c/reduced_codes.pdstor","w");
 	pd_write_pdstor(outfile, flype_circuit);
 	fclose(outfile);
 
-	outfile = fopen("/var/www/html/knot_site/sandboxes/dj/c/reduced_codes.txt","w");
+	outfile = fopen("/var/www/html/sandboxes/dj/knot_site/c/reduced_codes.txt","w");
 	for(next_pd_code = pd_stor_firstelt(flype_circuit); next_pd_code != NULL; next_pd_code = pd_stor_nextelt(flype_circuit)) {
 
 		pd_write_KnotTheory(outfile, next_pd_code);
