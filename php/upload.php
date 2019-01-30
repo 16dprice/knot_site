@@ -22,4 +22,4 @@ if($uploadOk == 0) {
 
 $hostName = $_SERVER['HTTP_HOST']; // need this in case if coming from local context (i.e. local IP instead of public URL)
 
-header("Location: http://$hostName/knot_site/sandboxes/dj/");
+header("Location: http://$hostName/sandboxes/dj/knot_site");

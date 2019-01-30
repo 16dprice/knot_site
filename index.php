@@ -29,7 +29,8 @@ $form->style = "width: 80%; margin: 0 auto;";
 echo $form;
 echo "<br><br>";
 
-shell_exec("c/example");
+$cwd = getcwd();
+shell_exec("c/example $cwd/c/"); // need $cwd because c script needs full path (makes it easier)
 
 
 $originalCodes = fopen("c/pdcodes.txt", "r");
