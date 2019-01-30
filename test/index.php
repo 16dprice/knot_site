@@ -2,10 +2,11 @@
 <head lang="en">
     <meta charset="utf-8">
     <title>Ajax File Upload with jQuery and PHP</title>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
-    <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--    <link rel="stylesheet" href="style.css" type="text/css"/>-->
+<!--    <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>-->
+<!--    <script type="text/javascript" src="js/script.js"></script>-->
+    <script type="text/javascript"   src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,11 +17,13 @@
 
         <div class="col-md-8">
 
-            <h1><a href="#" target="_blank"><img src="logo.png" width="80px"/>Ajax File Uploading with Database
+            <h1><a href="#" target="_blank">Ajax File Uploading with Database
                     MySql</a></h1>
             <hr>
-
-            <form id="form" action="ajaxupload.php" method="post" enctype="multipart/form-data">
+<!--            action="ajaxupload.php"-->
+<!--            method="post"-->
+<!--            onsubmit="submitFormViaAjax(this);"-->
+            <form id="form" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">NAME</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required/>
@@ -32,7 +35,7 @@
                 </div>
 
                 <input id="uploadImage" type="file" accept="image/*" name="image"/>
-                <div id="preview"><img src="filed.png"/></div>
+                <div id="preview"></div>
                 <br>
                 <input class="btn btn-success" type="submit" value="Upload">
             </form>
