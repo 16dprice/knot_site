@@ -18,9 +18,19 @@ int PD_VERBOSE = 0; // some of the library functions check for this (sets level 
 int VERBOSE;
 
 
+/*
+
+The file path will be given as the first argument to this script. !!THIS IS EXPECTED AND THE PROGRAM WILL TERMINATE
+IF IT IS NOT GIVEN!! If an input file name is provided, it will be the second argument to the script. If not,
+we default to 'pdcodes.txt'. If an input file name is provided, then an output name may or may not be provided.
+If it is, then it will be the third argument. If it is not, we default to 'reduced_codes.txt' and 'reduced_codes.pdstor'.
+It should be kept in mind that the way we are taking input, there is no way to reasonably give an output file name
+while excluding an input file name. Thus, there is no way to use the default input file name while using a custom
+output file name.
+
+*/
 void main(int argc, char *argv[]) {
 
-//	printf("Program name %s\n", argv[0]);
 	// variables
 	pd_stor_t *flype_circuit;
 	FILE *infile, *outfile;
@@ -31,21 +41,38 @@ void main(int argc, char *argv[]) {
 	size_t len = 0;
 	ssize_t read;
 	char *endptr;
-	// // char file_name[] = "";
 
-	// if(argc == 2) {
-	// 	// strcpy(file_name, argv[1]); // the text file full path
-	// 	char file_name[] = argv[1];
-	// } else {
-	// 	// strcpy(file_name, "/home/dj/knot_research/libplCurve_examples/pdcodes.txt");
-	// 	char file_name[] = "/home/dj/knot_research/libplCurve_examples/pdcodes.txt";
-	// }
+	char infile_path[100]; // there's no way the path will be over 100 characters... I really hope
+	char infile_full_path[150]; // same here...
+	char outfile_path[100];
+	char outfile_full_txt_path[150]; // path for the output txt file
+	char outfile_full_pdstor_path[150]; // path for the output pdstor file
 
-	// printf("%s\n", file_name);
+	// end variables
+
+	if(argc < 2) {
+	    printf("Not enough arguments supplied.\n");
+	    return;
+	} else {
+
+        // copy the file path to the input file path and then append the input file name to it
+        strcpy(infile_path, argv[1]);
+        strcpy(infile_full_path, strcat(infile_path, "pdcodes.txt"));
+
+        // same as above but for output file
+        // actually need two though, one for the output txt file and one for the output pdstor file
+        strcpy(outfile_path, argv[1]);
+        strcpy(outfile_full_txt_path, strcat(outfile_path, "reduced_codes.txt"));
+
+        strcpy(outfile_path, argv[1]);
+        strcpy(outfile_full_pdstor_path, strcat(outfile_path, "reduced_codes.pdstor"));
+
+	}
 
 	// some declarations
 	flype_circuit = pd_new_pdstor();
-	infile = fopen("/var/www/html/sandboxes/dj/knot_site/c/pdcodes.txt", "r"); // example file
+//	infile = fopen("/var/www/html/sandboxes/dj/knot_site/c/pdcodes.txt", "r"); // example file
+	infile = fopen(infile_full_path, "r"); // example file
 
 	// iterate through until read is the first line with length not equal to 1
 	// this will be the number of pd codes contained in the file
@@ -68,11 +95,11 @@ void main(int argc, char *argv[]) {
 		free(next_pd_code);
 	}
 
-	outfile = fopen("/var/www/html/sandboxes/dj/knot_site/c/reduced_codes.pdstor","w");
+	outfile = fopen(outfile_full_pdstor_path, "w");
 	pd_write_pdstor(outfile, flype_circuit);
 	fclose(outfile);
 
-	outfile = fopen("/var/www/html/sandboxes/dj/knot_site/c/reduced_codes.txt","w");
+	outfile = fopen(outfile_full_txt_path, "w");
 	for(next_pd_code = pd_stor_firstelt(flype_circuit); next_pd_code != NULL; next_pd_code = pd_stor_nextelt(flype_circuit)) {
 
 		pd_write_KnotTheory(outfile, next_pd_code);
