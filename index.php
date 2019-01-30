@@ -43,5 +43,7 @@ $inputDisplay = $PDprocessor->getInputFileContainer();
 $outputDisplay = $PDprocessor->getOutputFileContainer();
 
 echo $inputDisplay;
+
 echo "<br><br>";
+
 echo $outputDisplay;

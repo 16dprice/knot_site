@@ -82,6 +82,7 @@ class Simplified_PD_Processor {
             $tr->text .= "<td>$pd</td>";
 
             $table->text .= $tr;
+
         }
 
         return $table;
