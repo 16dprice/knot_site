@@ -77,15 +77,32 @@ class Simplified_PD_Processor {
         $table = new HTML_Element("table");
         $table->style = "width: 80%; margin: 0 auto;";
 
+        $copyText = ""; // the text that will be copied to clipboard when copy button is clicked
+
         foreach($inputPDs as $key => $pd) {
             $tr = new HTML_Element("tr");
             $tr->text .= "<td>$pd</td>";
 
             $table->text .= $tr;
 
+//            $copyText .= substr($pd, 0, -1); // remove the new line characters or copy command breaks
+            $copyText .= substr($pd, 0, -1) . "<br>"; // remove the new line characters or copy command breaks
+
         }
 
+        $table->text .= "<tr><td>" . $this->getCopyButton($copyText, "Click to Copy PD Codes to Clipboard") . "</td></tr>";
+
         return $table;
+
+    }
+
+    private function getCopyButton($copyText, $buttonText) {
+
+        $copyButton = new HTML_Element("button");
+        $copyButton->onclick = "copyTextToClipboard('$copyText');";
+        $copyButton->text = $buttonText;
+
+        return $copyButton;
 
     }
 

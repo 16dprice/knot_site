@@ -15,6 +15,11 @@ require_once("php/autoload/autoload.class.php");
 new Autoload(['php']);
 //</editor-fold>
 
+$head = new HTML_Element("head");
+$head->text .= new HTML_Element("script", ["type" => "text/javascript", "src" => "js/main.js"]);
+
+echo $head;
+
 $form = new HTML_Element("form");
 $form->action = 'php/upload.php';
 $form->method = 'post';
