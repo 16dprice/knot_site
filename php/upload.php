@@ -23,4 +23,5 @@ if($uploadOk == 0) {
 $hostName = $_SERVER['HTTP_HOST']; // need this in case if coming from local context (i.e. local IP instead of public URL)
 $sitePath = $_SERVER['PHP_SELF']; // need this to differentiate between different contexts
 
-header("Location: http://$hostName$sitePath");
+//header("Location: http://$hostName");
+header("Location: ../index.php");
