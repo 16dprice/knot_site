@@ -1,0 +1,14 @@
+.page {
+    border-top: 0;
+    width: 80%;
+}
+
+.custom-nav {
+    border-width: 0 0 1px !important;
+    border-radius: 0 !important;
+}
+
+.centered {
+    margin: 0 auto;
+    text-align: center;
+}

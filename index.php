@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 //<editor-fold desc="Error Reporting">
 
 // setup error reporting
@@ -9,46 +11,42 @@ error_reporting(E_ALL);
 
 //</editor-fold>
 
+//<editor-fold desc="Tab Constants">
+
+const HOME_TAB = 20;
+const SIMPLIFY_PD = 21;
+
+//</editor-fold>
+
 //<editor-fold desc="Autoload">
+
 require_once("php/autoload/autoload.class.php");
 
 new Autoload(['php']);
+
 //</editor-fold>
 
-$head = new HTML_Element("head");
-$head->text .= new HTML_Element("script", ["type" => "text/javascript", "src" => "js/main.js"]);
+$runShell = TRUE;
 
-echo $head;
+if(isset($_REQUEST['AJAX']) && $_REQUEST['AJAX'] == TRUE) {
 
-$form = new HTML_Element("form");
-$form->action = 'php/upload.php';
-$form->method = 'post';
-$form->enctype = 'multipart/form-data';
+    $runShell = FALSE;
 
-$form->text .= "Select file to Upload:";
-$form->text .= new HTML_Element("input", ['type' => 'file', 'name' => 'fileToUpload', 'id' => 'fileToUpload']);
-$form->text .= new HTML_Element("input", ['type' => 'submit', 'value' => 'Upload File', 'name' => 'submit']);
+    if(isset($_REQUEST['file'])) {
+        include($_REQUEST['file']);
+        die('');
+    }
+}
 
-$form->style = "width: 80%; margin: 0 auto;";
+if($runShell) {
 
-echo $form;
-echo "<br><br>";
+    // init shell
+    $shell = new Shell();
 
-$cwd = getcwd();
-shell_exec("c/example $cwd/c/"); // need $cwd because c script needs full path (makes it easier)
+    // get the html from the shell with page title
+    $html = $shell->getHtml("Knot Site");
 
+    // echo the html
+    echo $html;
 
-$originalCodes = fopen("c/pdcodes.txt", "r");
-$reducedCodes = fopen("c/reduced_codes.txt", "r");
-
-
-$PDprocessor = new Simplified_PD_Processor($originalCodes, $reducedCodes);
-
-$inputDisplay = $PDprocessor->getInputFileContainer();
-$outputDisplay = $PDprocessor->getOutputFileContainer();
-
-echo $inputDisplay;
-
-echo "<br><br>";
-
-echo $outputDisplay;
+}

@@ -1,0 +1,11 @@
+.navbar-fix {
+    margin-bottom: 5%;
+}
+
+.right-adjusted {
+    margin-right: 1% !important;
+}
+
+.clickable {
+    cursor: pointer;
+}

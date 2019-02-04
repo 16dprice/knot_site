@@ -1,25 +1,74 @@
-function copyTextToClipboard(copyText) {
+function openTab(entryConst) {
 
-    let regex = /<br\s*[\/]?>/gi; // the regular expression to to find <br> tags
+    let filename = "./ajax/change_tab.ajax.php";
+    console.log(entryConst);
 
-    copyText = copyText.replace(regex, "\n\n"); // do the replacement of <br> tags
+    $.ajax({
+        'url': 'index.php',
+        'type': 'POST',
+        'data': {
+            entryConst: entryConst,
+            file: filename,
+            AJAX: true
+        },
+        success : function(data) {
+            console.log(data);
 
-    // console.log(copyText);
+            window.location.reload();
+        },
+        error : function(request, error) {
 
-    let textArea = document.createElement('textarea'); // create a text area
+        }
+    });
 
-    // set some values for the text area that allow us to select it, copy the text we want, and also hide it from the page
-    textArea.value = copyText;
-    textArea.setAttribute('readonly', ''); // for page readers (probably not needed here, but eh)
-    textArea.style.position = 'absolute';
-    textArea.style.left = '-9999px';
+}
 
-    document.body.appendChild(textArea); // append the invisible text area
+function uploadPDcodeToSimplify() {
 
-    textArea.select(); // select it so we can copy the text
+    // get the input element that has the file on it
+    let fileInput = $('#pd_code_file_upload_input')[0];
 
-    // copy the text to the clipboard and remove the text area from the screen
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
+    // get the file and init a reader
+    let file = fileInput.files[0];
+    let reader = new FileReader();
+
+    // set the reader onload so that it gets the contents of the text file and sends them to an array which
+    // is then sent to the server side
+    reader.onload = function(e) {
+
+        let fileText = e.target.result.split("\n");
+
+        let i, pdInput = {};
+        pdInput.count = fileText[0];
+        for(i = 1; i < fileText.length; i++) {
+            pdInput[i - 1] = fileText[i];
+        }
+
+        console.log(pdInput);
+        let filename = "./ajax/simplify_pd.ajax.php";
+
+        $.ajax({
+            'url': 'index.php',
+            'type': 'POST',
+            'data': {
+                pdInput: JSON.stringify(pdInput),
+                file: filename,
+                AJAX: true
+            },
+            success : function(data) {
+                let jData = JSON.parse(data);
+
+                $('#inputFileContainer').text(jData['inputContainer']);
+                $('#outputFileContainer').text(jData['outputContainer']);
+
+            },
+            error : function(request, error) {
+
+            }
+        });
+
+    };
+
+    reader.readAsText(file, "UTF-8");
 
 }
