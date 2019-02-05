@@ -62,8 +62,8 @@ class Shell extends Shell_V0 {
         $bootCSS = new HTML_Element("link");
 
         $bootCSS->rel = "stylesheet";
-        $bootCSS->href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
-        $bootCSS->integrity = "sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u";
+        $bootCSS->href = "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css";
+        $bootCSS->integrity = "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS";
         $bootCSS->crossorigin = "anonymous";
 
         $head->text .= $bootCSS;
@@ -83,8 +83,8 @@ class Shell extends Shell_V0 {
         // compiled and minified bootstrap JS
         $bootJS = new HTML_Element("script");
 
-        $bootJS->src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js";
-        $bootJS->integrity = "sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa";
+        $bootJS->src = "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js";
+        $bootJS->integrity = "sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k";
         $bootJS->crossorigin = "anonymous";
 
         $head->text .= $bootJS;

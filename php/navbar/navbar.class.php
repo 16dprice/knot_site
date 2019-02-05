@@ -17,20 +17,19 @@ class Navbar {
 
     public function getNav() {
 
-		// init nav
-		$nav = new HTML_Element("nav");
+	    // init ul for nav
+        $nav = new HTML_Element("nav");
 
-        $nav->class .= " custom-nav "; // my custom nav class
+        $nav->class = " navbar navbar-expand-lg navbar-light bg-light ";
 
-		// give nav all bootstrap classes
-		$nav->class .= " navbar "; // gives it a basic navbar look
-		$nav->class .= " navbar-inverse "; // makes it black instead of white
+        $links = new HTML_Element("ul");
+        $links->class = " navbar-nav mr-auto ";
 
-		// get the nav links
-		$this->getNavLinks($nav);
+        $this->getNavLinks($links);
 
-		// return container with nav in it
-		return $nav;
+        $nav->text .= $links;
+
+        return $nav;
 		
 	}
 	
@@ -52,25 +51,35 @@ class Navbar {
 	}
 	
 	protected function getHomeLink() {
-		$navHome = new HTML_Element("a");
-		
-		$navHome->id = "home";
-		$navHome->class = "navbar-brand clickable";
-		$navHome->onclick = "openTab(".HOME_TAB.")";
-		$navHome->text .= "Home";
-		
-		return $navHome;
+
+	    $navItem = new HTML_Element("li");
+	    $navItem->class = " nav-item ";
+
+	    $navLink = new HTML_Element("a");
+	    $navLink->class = " nav-link ";
+        $navLink->id = "home";
+        $navLink->onclick = "openTab(".HOME_TAB.")";
+        $navLink->text .= "Home";
+
+        $navItem->text .= $navLink;
+        return $navItem;
+
 	}
 
 	protected function getSimplifyPDpageLink() {
-	    $navPDpage = new HTML_Element("a");
 
-        $navPDpage->id = "simplify_pd_page";
-        $navPDpage->class = "navbar-brand clickable";
-        $navPDpage->onclick = "openTab(".SIMPLIFY_PD.")";
-        $navPDpage->text .= "Simplify PD Codes";
+        $navItem = new HTML_Element("li");
+        $navItem->class = " nav-item ";
 
-        return $navPDpage;
+        $navLink = new HTML_Element("a");
+        $navLink->class = " nav-link ";
+        $navLink->id = "simplify_pd_page";
+        $navLink->onclick = "openTab(".SIMPLIFY_PD.")";
+        $navLink->text .= "Simplify PD Codes";
+
+        $navItem->text .= $navLink;
+        return $navItem;
+
     }
 	
 }

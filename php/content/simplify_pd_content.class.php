@@ -17,25 +17,33 @@ class Simplify_PD_Content {
 
     private function getFileUploadInput() {
 
-        $uploadContainer = new HTML_Element("table");
-        $uploadContainer->class = " centered ";
 
-        // build the file upload input and append to ul
-        $inputText = "Select File to Upload:";
+        $container = new HTML_Element("div"); // the 'form'
+
+
+        $fileUploadContainer = new HTML_Element("div", ["class" => " form-group "]);
+
+        $inputLabel = new HTML_Element("label");
+        $inputLabel->text .= "Select File to Upload:";
+
         $fileInputElement = new HTML_Element("input");
         $fileInputElement->type = "file";
         $fileInputElement->id = "pd_code_file_upload_input";
+        $fileInputElement->class = " form-control-file centered ";
+        $fileInputElement->style = "width: 20%;";
 
-        $uploadContainer->text .= "<tr><td>$inputText</td><td>$fileInputElement</td></tr>";
+        $fileUploadContainer->text .= $inputLabel . $fileInputElement;
+        $container->text .= $fileUploadContainer;
 
-        // build the file upload submit button and append to ul
+        // --------------------------------------------------------------------------------
+
         $fileSubmitElement = new HTML_Element("button");
         $fileSubmitElement->text = "Upload File";
         $fileSubmitElement->onclick = "uploadPDcodeToSimplify();";
 
-        $uploadContainer->text .= "<tr><td colspan='2'>$fileSubmitElement</td></tr>";
+        $container->text .= $fileSubmitElement;
 
-        return $uploadContainer;
+        return $container;
 
     }
 
