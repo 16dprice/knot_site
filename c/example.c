@@ -37,8 +37,8 @@ void main(int argc, char *argv[]) {
 	pd_code_t *next_pd_code;
 	int i;
 	long imax;
-	char *line;
-	size_t len = 0;
+	char line[10000]; // set this and len to really big numbers because this dictates the max length of a line we can read
+	size_t len = 10000;
 	ssize_t read;
 	char *endptr;
 
@@ -76,7 +76,7 @@ void main(int argc, char *argv[]) {
 
 	// iterate through until read is the first line with length not equal to 1
 	// this will be the number of pd codes contained in the file
-	while((read = getline(&line, &len, infile)) == 1) {}
+	while(strlen(fgets(line, len, infile)) == 1) {}
 
 	imax = strtol(line, &endptr, 10);
 
