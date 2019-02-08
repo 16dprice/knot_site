@@ -5,7 +5,8 @@ class Shell extends Shell_V0 {
     // the callbacks for all of the tab constants
     protected $tabConfig = [
         HOME_TAB => "getHomeBody",
-        SIMPLIFY_PD => "getSimplifyPDpage"
+        SIMPLIFY_PD => "getSimplifyPDpage",
+        UPLOAD_PD_CODES => "getUploadPDcodesPage"
     ];
 
     public function getHtml($title) {
@@ -136,6 +137,14 @@ class Shell extends Shell_V0 {
         $simplifyPDpage = new Simplify_PD_Content();
 
         return $simplifyPDpage;
+
+    }
+
+    protected function getUploadPDcodesPage() {
+
+        $uploadPDcodesPage = new Upload_PD_Codes_Content();
+
+        return $uploadPDcodesPage;
 
     }
 

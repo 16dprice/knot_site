@@ -15,6 +15,7 @@ error_reporting(E_ALL);
 
 const HOME_TAB = 20;
 const SIMPLIFY_PD = 21;
+const UPLOAD_PD_CODES = 22;
 
 //</editor-fold>
 

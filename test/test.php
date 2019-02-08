@@ -9,14 +9,15 @@ error_reporting(E_ALL);
 
 //</editor-fold>
 
-$servername = "172.18.0.3";
+$servername = "db";
 $username = "root";
 $password = "research-pass124";
+$dbname = "flype_db";
 
-echo "$servername $username $password";
+echo "$servername :: $username :: $password :: $dbname";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {

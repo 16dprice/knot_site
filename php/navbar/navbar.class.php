@@ -4,7 +4,8 @@ class Navbar {
 	
 	protected $navLinkCallbacks = [
 	    "getHomeLink",
-        "getSimplifyPDpageLink"
+        "getSimplifyPDpageLink",
+        "getUploadPDcodesPageLink"
     ];
 	
 	public function __construct() {
@@ -57,7 +58,6 @@ class Navbar {
 
 	    $navLink = new HTML_Element("a");
 	    $navLink->class = " nav-link ";
-        $navLink->id = "home";
         $navLink->onclick = "openTab(".HOME_TAB.")";
         $navLink->text .= "Home";
 
@@ -73,9 +73,23 @@ class Navbar {
 
         $navLink = new HTML_Element("a");
         $navLink->class = " nav-link ";
-        $navLink->id = "simplify_pd_page";
         $navLink->onclick = "openTab(".SIMPLIFY_PD.")";
         $navLink->text .= "Simplify PD Codes";
+
+        $navItem->text .= $navLink;
+        return $navItem;
+
+    }
+
+    protected function getUploadPDcodesPageLink() {
+
+	    $navItem = new HTML_Element("li");
+	    $navItem->class = " nav-item ";
+
+	    $navLink = new HTML_Element("a");
+        $navLink->class = " nav-link ";
+        $navLink->onclick = "openTab(".UPLOAD_PD_CODES.")";
+        $navLink->text .= "Save PD Codes";
 
         $navItem->text .= $navLink;
         return $navItem;
