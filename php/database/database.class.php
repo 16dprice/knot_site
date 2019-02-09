@@ -87,31 +87,36 @@ class Database {
     // expects array(0 => array('field' => 'val', ... ), 1 => ... )
     public static function viewResultsAsTable($results) {
 
-        $table = new HTML_Element("table");
-        $table->style .= " left: 0; right: 0; width: 80%; margin: 0 auto; ";
+        if(count($results) > 0) {
+            $table = new HTML_Element("table");
+//            $table->style .= " left: 0; right: 0; width: 80%; margin: 0 auto; ";
+            $table->class .= " centered ";
 
-        $firstRes = $results[0];
+            $firstRes = $results[0];
 
-        $tablesHeaders = array_keys($firstRes);
+            $tablesHeaders = array_keys($firstRes);
 
-        $headerTR = new HTML_Element("tr");
-        foreach($tablesHeaders as $header) {
-            $headerTR->text .= "<th>$header</th>";
-        }
-        $table->text .= $headerTR;
+            $headerTR = new HTML_Element("tr");
+            foreach ($tablesHeaders as $header) {
+                $headerTR->text .= "<th style='text-align: center;'>$header</th>";
+            }
+            $table->text .= $headerTR;
 
-        foreach($results as $res) {
-            $rowTR = new HTML_Element("tr");
+            foreach ($results as $res) {
+                $rowTR = new HTML_Element("tr");
 
-            foreach($res as $field => $val) {
-                $rowTR->text .= "<td>$val</td>";
+                foreach ($res as $field => $val) {
+                    $rowTR->text .= "<td>$val</td>";
+                }
+
+                $table->text .= $rowTR;
+
             }
 
-            $table->text .= $rowTR;
-
+            return $table;
+        } else {
+            return "Nothing in results given to viewResultsAsTable.";
         }
-
-        return $table;
 
     }
 

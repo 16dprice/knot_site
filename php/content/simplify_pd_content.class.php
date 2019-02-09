@@ -17,9 +17,9 @@ class Simplify_PD_Content {
 
     private function getFileUploadInput() {
 
-
         $container = new HTML_Element("div"); // the 'form'
 
+        // --------------------------------------------------------------------------------
 
         $fileUploadContainer = new HTML_Element("div", ["class" => " form-group "]);
 
