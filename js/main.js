@@ -57,6 +57,7 @@ function uploadPDcodeToSimplify() {
             },
             success : function(data) {
                 let jData = JSON.parse(data);
+                console.log(jData);
 
                 $('#inputFileContainer').html(jData['inputContainer']);
                 $('#outputFileContainer').html(jData['outputContainer']);

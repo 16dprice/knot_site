@@ -16,7 +16,7 @@ for($i = 0; $i < $pdCount; $i++) {
 
 fclose($pdInputFile);
 
-shell_exec("c/example $cwd/c");
+$cOutput = shell_exec("c/example $cwd/c");
 
 $originalCodes = fopen("c/pdcodes.txt", "r");
 $reducedCodes = fopen("c/reduced_codes.txt", "r");
@@ -31,5 +31,6 @@ $retArray = [];
 
 $retArray["inputContainer"] = $inputDisplay->__toString();
 $retArray["outputContainer"] = $outputDisplay->__toString();
+$retArray["cOutput"] = $cOutput;
 
 echo json_encode($retArray, JSON_FORCE_OBJECT);
