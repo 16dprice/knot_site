@@ -11,7 +11,12 @@ NOTE: this code only works for ALTERNATING knots. Non-alternating knots will ret
 crossings = ToExpression[$ScriptCommandLine[[2]]];
 listing = ToExpression[$ScriptCommandLine[[3]]];
 
-knot = PD@Knot[crossings, listing];
+If[crossings <= 10,
+    knot = PD@Knot[crossings, listing],
+    knot = PD@Knot[crossings, Alternating, listing]
+];
+
+If[!isAlternating[knot],Print["\n"];Abort[]];
 
 hasPDCodeBeenFound[pdcode_, codesFound_]:=Module[{},
 
@@ -35,16 +40,16 @@ hasPDCodeBeenFound[pdcode_, codesFound_]:=Module[{},
 
 allMinimalDiagrams = {};
 
-getAllMinimalDiagrams[pdcode_]:=Module[{allFlypesPerformed},
+getAllMinimalDiagrams[pdcode_]:=Module[{pdlist=removePDCode@pdcode, allFlypesPerformed},
 
     (* if it's already been found, do nothing i.e. the base case *)
-    If[hasPDCodeBeenFound[pdcode, allMinimalDiagrams], Return[]];
+    If[hasPDCodeBeenFound[pdlist, allMinimalDiagrams], Return[]];
 
     (* if it's not an empty list (those are returned sometimes) *)
-    If[Length[pdcode] != 0, AppendTo[allMinimalDiagrams, pdcode]];
+    If[Length[pdlist] != 0, AppendTo[allMinimalDiagrams, pdlist]];
 
     (* recursive call *)
-    allFlypesPerformed = performAllFlypes[pdcode];
+    allFlypesPerformed = performAllFlypes[pdlist];
     getAllMinimalDiagrams/@allFlypesPerformed;
 
 ];
@@ -53,7 +58,7 @@ getAllMinimalDiagrams[pdcode_]:=Module[{allFlypesPerformed},
 getAllMinimalDiagrams[knot];
 
 If[Length[allMinimalDiagrams] == 1,
-    Export["/var/www/html/sandboxes/dj/knot_site/c/reduced_codes.txt", ToString/@allMinimalDiagrams],
+    Export["/var/www/html/sandboxes/dj/knot_site/c/reduced_codes.txt", ToString/@(replacePDCode/@allMinimalDiagrams)],
     exportPDsAsTxt[allMinimalDiagrams, "/var/www/html/sandboxes/dj/knot_site/c/pdcodes.txt"];
     Run["/var/www/html/sandboxes/dj/knot_site/c/example /var/www/html/sandboxes/dj/knot_site/c/"]
 ];
