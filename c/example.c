@@ -18,7 +18,7 @@ int PD_VERBOSE = 0; // some of the library functions check for this (sets level 
 int VERBOSE;
 
 
-/*
+/**
 
 The file path will be given as the first argument to this script. !!THIS IS EXPECTED AND THE PROGRAM WILL TERMINATE
 IF IT IS NOT GIVEN!! If an input file name is provided, it will be the second argument to the script. If not,
@@ -32,6 +32,7 @@ output file name.
 void main(int argc, char *argv[]) {
 
 	// variables
+
 	pd_stor_t *flype_circuit;
 	FILE *infile, *outfile;
 	pd_code_t *next_pd_code;
@@ -71,7 +72,6 @@ void main(int argc, char *argv[]) {
 
 	// some declarations
 	flype_circuit = pd_new_pdstor();
-//	infile = fopen("/var/www/html/sandboxes/dj/knot_site/c/pdcodes.txt", "r"); // example file
 	infile = fopen(infile_full_path, "r"); // example file
 
 	// iterate through until read is the first line with length not equal to 1
