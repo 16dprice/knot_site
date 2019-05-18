@@ -29,7 +29,7 @@ while excluding an input file name. Thus, there is no way to use the default inp
 output file name.
 
 */
-void main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 
 	// variables
 
@@ -38,8 +38,8 @@ void main(int argc, char *argv[]) {
 	pd_code_t *next_pd_code;
 	int i;
 	long imax;
-	char line[10000]; // set this and len to really big numbers because this dictates the max length of a line we can read
-	size_t len = 10000;
+	char line[1000]; // set this and len to really big numbers because this dictates the max length of a line we can read
+	size_t len = 1000;
 	ssize_t read;
 	char *endptr;
 
@@ -52,8 +52,8 @@ void main(int argc, char *argv[]) {
 	// end variables
 
 	if(argc < 2) {
-	    printf("Not enough arguments supplied.\n");
-	    return;
+//	    printf("Not enough arguments supplied.\n");
+	    return(-1);
 	} else {
 
         // copy the file path to the input file path and then append the input file name to it
@@ -69,7 +69,7 @@ void main(int argc, char *argv[]) {
         strcpy(outfile_full_pdstor_path, strcat(outfile_path, "reduced_codes.pdstor"));
 
 	}
-
+    printf("here\n");
 	// some declarations
 	flype_circuit = pd_new_pdstor();
 	infile = fopen(infile_full_path, "r"); // example file
@@ -80,10 +80,9 @@ void main(int argc, char *argv[]) {
 
 	imax = strtol(line, &endptr, 10);
 
-	printf("imax is %ld\n", imax);
+//	printf("imax is %ld\n", imax);
 
 	for(i=0; i < imax; i++) {
-		printf("here\n");
 		// get the next pd code from the file
 		// TODO: what to do if this is null???
 		next_pd_code = pd_read_KnotTheory(infile);
@@ -112,4 +111,5 @@ void main(int argc, char *argv[]) {
 	// free everything
 	pd_free_pdstor(&flype_circuit);
 
+	return(0);
 }

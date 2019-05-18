@@ -49,62 +49,62 @@ function getPDsFromTxtFile($file) {
 }
 
 $knotData = [
-    [
-        "crossings" => 3,
-        "count" => 1
-    ],
-    [
-        "crossings" => 4,
-        "count" => 1
-    ],
-    [
-        "crossings" => 5,
-        "count" => 2
-    ],
-    [
-        "crossings" => 6,
-        "count" => 3
-    ],
-    [
-        "crossings" => 7,
-        "count" => 7
-    ],
-    [
-        "crossings" => 8,
-        "count" => 21
-    ],
-    [
-        "crossings" => 9,
-        "count" => 49
-    ],
-    [
-        "crossings" => 10,
-        "count" => 165
-    ],
-    [
-        "crossings" => 11,
-        "count" => 367
-    ],
-    [
-        "crossings" => 12,
-        "count" => 1288
-    ],
+//    [
+//        "crossings" => 3,
+//        "count" => 1
+//    ],
+//    [
+//        "crossings" => 4,
+//        "count" => 1
+//    ],
+//    [
+//        "crossings" => 5,
+//        "count" => 2
+//    ],
+//    [
+//        "crossings" => 6,
+//        "count" => 3
+//    ],
+//    [
+//        "crossings" => 7,
+//        "count" => 7
+//    ],
+//    [
+//        "crossings" => 8,
+//        "count" => 21
+//    ],
+//    [
+//        "crossings" => 9,
+//        "count" => 49
+//    ],
+//    [
+//        "crossings" => 10,
+//        "count" => 165
+//    ],
+//    [
+//        "crossings" => 11,
+//        "count" => 367
+//    ],
+//    [
+//        "crossings" => 12,
+//        "count" => 1288
+//    ],
     [
         "crossings" => 13,
         "count" => 4878
     ],
-    [
-        "crossings" => 14,
-        "count" => 19536
-    ],
-    [
-        "crossings" => 15,
-        "count" => 85263
-    ],
-    [
-        "crossings" => 16,
-        "count" => 379799
-    ],
+//    [
+//        "crossings" => 14,
+//        "count" => 19536
+//    ],
+//    [
+//        "crossings" => 15,
+//        "count" => 85263
+//    ],
+//    [
+//        "crossings" => 16,
+//        "count" => 379799
+//    ],
 ];
 
 $db = Database::getInstance();
@@ -121,7 +121,7 @@ foreach($knotData as $knotInfo) {
     $crossings = $knotInfo["crossings"];
     $count = $knotInfo["count"];
 
-    for($listing = 1; $listing <= $count; $listing++) {
+    for($listing = 1860; $listing <= $count; $listing++) {
         $output = shell_exec("./get_all_minimal_diagrams.wls $crossings $listing");
 
         // if the operation wasn't aborted, then store results
